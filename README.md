@@ -24,7 +24,7 @@ protobuf==3.19.6
 ```
 ## 2. Usage
 ### 2.1 Data preparation
-Please follow the [instructions](./pre_process/readme.md) to prepare the training and testing dataset.
+As the paper is under review, the dataset needs to be kept confidential for the time being, and the download link will be made public after the acceptance of the paper.
 
 ### 2.2 Train
 The paper is under review and now needs to be kept confidential.
