@@ -1,74 +1,70 @@
-# PyTorch implementation of "Intelligent traffic accident detection system in complex dynamic scenarios based on the dual-stream spatiotemporal-fusion model"
+## HF2-VAD
+Offcial implementation of "Intelligent traffic accident detection system in complex dynamic scenarios based on the dual-stream spatiotemporal-fusion model".
 
-<p align="center"><img src="./MDTS-ADNet/overview.png" alt="no_image" width="40%" height="40%" /><img src="./MDTS-ADNet_files/teaser.png" alt="no_image" width="60%" height="60%" /></p>
-This is the implementation of the paper "Intelligent traffic accident detection system in complex dynamic scenarios based on the dual-stream spatiotemporal-fusion model".
-
-For more information, checkout the project site [[website](https://cvlab.yonsei.ac.kr/projects/MNAD/)] and the paper [[PDF](http://openaccess.thecvf.com/content_CVPR_2020/papers/Park_Learning_Memory-Guided_Normality_for_Anomaly_Detection_CVPR_2020_paper.pdf)].
-
-## Dependencies
-* Python 3.6
-* PyTorch 1.1.0
-* Numpy
-* Sklearn
-
-## Datasets
-* USCD Ped2 [[dataset](https://github.com/StevenLiuWen/ano_pred_cvpr2018)]
-* CUHK Avenue [[dataset](https://github.com/StevenLiuWen/ano_pred_cvpr2018)]
-* ShanghaiTech [[dataset](https://github.com/StevenLiuWen/ano_pred_cvpr2018)]
-
-These datasets are from an official github of "Future Frame Prediction for Anomaly Detection - A New Baseline (CVPR 2018)".
-
-Download the datasets into ``dataset`` folder, like ``./dataset/ped2/``
-
-## Update
-* 02/04/21: We uploaded the codes based on reconstruction method, and pretrained wieghts for Ped2 reconstruction, Avenue prediction and Avenue reconstruction.
-
-
-## Training
-* ~~The training and testing codes are based on prediction method~~
-* Now you can implemnet the codes based on both prediction and reconstruction methods.
-* The codes are basically based on the prediction method, and you can easily implement this as
-```bash
-git clone https://github.com/cvlab-yonsei/projects
-cd projects/MNAD/code
-python Train.py # for training
+![pipeline](./assets/fig2-CR.png)
+## 1. Dependencies
 ```
-* You can freely define parameters with your own settings like
-```bash
-python Train.py --gpus 1 --dataset_path 'your_dataset_directory' --dataset_type avenue --exp_dir 'your_log_directory'
+python==3.6
+pytorch==1.5.1
+mmcv-full==1.3.1
+mmdet==2.11.0
+scikit-learn==0.23.2
+edflow==0.4.0
+PyYAML==5.4.1
+tensorboardX==2.4
 ```
-* For the reconstruction task, you need to newly set the parameters, *e.g,*, the target task, the weights of the losses and the number of the time sequence.
-```bash
-python Train.py --method recon --loss_compact 0.01 --loss_separate 0.01 --t_length 1 # for training
+## 2. Usage
+### 2.1 Data preparation
+Please follow the [instructions](./pre_process/readme.md) to prepare the training and testing dataset.
+
+### 2.2 Train
+We train the ML-MemAE-SC at first, then train CVAE model with the reconstructed flows,
+and finally finetune the whole framework. All the config files are located at `./cfgs`. 
+
+To train the ML-MemAE-SC, run:
+```python
+$ python ml_memAE_sc_train.py
 ```
-
-## Evaluation
-* Test your own model
-* Check your dataset_type (ped2, avenue or shanghai)
-```bash
-python Evaluate.py --dataset_type ped2 --model_dir your_model.pth --m_items_dir your_m_items.pt
+To train the CVAE model with reconstructed flows, run:
+```python
+$ python trian.py
 ```
-* For the reconstruction task, you need to set the parameters as
-```bash
-python Evaluate.py --method recon --t_length 1 --alpha 0.7 --th 0.015 --dataset_type ped2 --model_dir your_model.pth --m_items_dir your_m_items.pt
+And finetune the whole HF2VAD framework together as:
+```python
+$ python finetune.py
 ```
-* Test the model with our pre-trained model and memory items
-```bash
-python Evaluate.py --dataset_type ped2 --model_dir pretrained_model.pth --m_items_dir m_items.pt
+For different datasets, please modify the configuration files accordingly.
+
+### 2.3 Evaluation
+To evaluation the anomaly detection performance of the trained model, run:
+```python
+$ python eval.py [--model_save_path] [--cfg_file] 
 ```
+E.g., for the ped2 dataset:
+```python
+$ python eval.py \
+         --model_save_path=./pretrained_ckpts/ped2_HF2VAD_99.31.pth \
+         --cfg_file=./pretrained_ckpts/ped2_HF2VAD_99.31_cfg.yaml
+```
+You can download the pretrained weights of HF2VAD for Ped2, Avenue and ShanghaiTech datasets 
+from [here](https://drive.google.com/drive/folders/10B7WmZmBSgOPjkbedK9JwH6HRo06VSC2?usp=sharing).
 
-## Pre-trained model and memory items
+## 3. Results
 
-Will be released soon.
-<!--
-* Download our pre-trained model and memory items 
-<br>[[Ped2 Prediction](https://drive.google.com/file/d/1NdsGKUPvdNNwsnWcMYeO44gX2h-oJlEn/view?usp=sharing)]
-<br>[[Ped2 Reconstruction](https://drive.google.com/file/d/1HgntMYJd_Qn5L1wLnsz3xnbjGwbmd5uJ/view?usp=sharing)]
-<br>[[Avenue Prediction](https://drive.google.com/file/d/1q7auxT21We9bg5ySsLP9HoqsxPATsd8K/view?usp=sharing)]
-<br>[[Avenue Reconstruction](https://drive.google.com/file/d/1mFADg-97ZWXIvZ-tAcoN7hoCFHXMN7Gc/view?usp=sharing)]
+|     Model      | UCSD Ped2 | CUHK Avenue | ShanghaiTech |
+| :------------: | :-------: | :---------: | :----------: |
+|    HF2-VAD     |   99.3%   |    91.1%    |    76.2%     |
 
-* Note that, you need to set lambda and threshold to 0.7 and 0.015, respectively, for the reconstruction task. See more details in the paper.
--->
+## Acknowledgment
+We thank jhaux for the PyTorch implementation of the [conditional VAE](https://github.com/jhaux/VUNet).
 
-## Bibtex
+## Citation
+If you find this repo useful, please consider citing:
+```
+@inproceedings{liu2021hf2vad,
+title = {A Hybrid Video Anomaly Detection Framework via Memory-Augmented Flow Reconstruction and Flow-Guided Frame Prediction},
+author = {Liu, Zhian and Nie, Yongwei and Long, Chengjiang and Zhang, Qing and Li, Guiqing},
+booktitle={Proceedings of the IEEE International Conference on Computer Vision},
+year = {2021}
+}
 ```
