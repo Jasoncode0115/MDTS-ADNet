@@ -24,7 +24,10 @@ protobuf==3.19.6
 ```
 ## 2. Usage
 ### 2.1 Data preparation
-As the paper is under review, the dataset needs to be kept confidential for the time being, and the download link will be made public after the acceptance of the paper.
+As the paper is under review, the dataset needs to be kept confidential for the time being, here we only disclose part of the dataset:
+[4M-TAD_Part_1](https://drive.google.com/file/d/1piFA9N8RO185Uhq9kPaDcXAk3eUWXSoh/view?usp=sharing)
+
+The full dataset will be updated after the acceptance of the article.
 
 ### 2.2 Train
 The paper is under review and now needs to be kept confidential.
