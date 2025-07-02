@@ -24,6 +24,11 @@ protobuf==3.19.6
 ```
 ## 2. Usage
 ### 2.1 Data preparation
+
+![pipeline](./MDTS-ADNet_files/dataset.png)
+
+We created a large traffic accident dataset called 4M-TAD containing frame-level labels standardized for unsupervised traffic accident detection.
+
 As the paper is under review, the dataset needs to be kept confidential for the time being, here we only disclose part of the dataset:
 
 [4M-TAD_Part_1](https://drive.google.com/file/d/1WXcdSDeiVRNw4gcVnvqtQmVdFDpCtecN/view?usp=sharing)
