@@ -33,6 +33,8 @@ As the paper is under review, the dataset needs to be kept confidential for the 
 
 [4M-TAD_Part_1](https://drive.google.com/file/d/1WXcdSDeiVRNw4gcVnvqtQmVdFDpCtecN/view?usp=sharing)
 
+As I am applying for a PhD program, I need to store emails. Google Drive's free storage is limited, and download links will be restored shortly.
+
 The full dataset will be updated after the acceptance of the article.
 
 ### 2.2 Train
