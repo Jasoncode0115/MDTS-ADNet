@@ -29,13 +29,11 @@ protobuf==3.19.6
 
 We created a large traffic accident dataset called 4M-TAD containing frame-level labels standardized for unsupervised traffic accident detection.
 
-As the paper is under review, the dataset needs to be kept confidential for the time being, here we only disclose part of the dataset:
+Due to confidentiality requirements, only a part of the 4M-TAD dataset is being disclosed at this time:
 
 [4M-TAD_Part_1](https://drive.google.com/file/d/1WXcdSDeiVRNw4gcVnvqtQmVdFDpCtecN/view?usp=sharing)
 
-As I am applying for a PhD program, I need to store emails. Google Drive's free storage is limited, and download links will be restored shortly.
-
-The full dataset will be updated after the acceptance of the article.
+If you need access to the entire dataset for research purposes, please contact me via email at huxiaolong01155@gmail.com.
 
 ### 2.2 Train
 The paper is under review and now needs to be kept confidential.
@@ -52,7 +50,7 @@ AUC is the core indicator.
 |    MDTS-ADNet    |   84.33%   |    82.14%    | 
 
 ## Acknowledgment
-The paper is under review and now needs to be kept confidential.
+We thank cvlab-yonsei for the PyTorch implementation of the [MNAD](https://github.com/cvlab-yonsei/MNAD).
 
 ## Citation
 The paper is under review and now needs to be kept confidential.
