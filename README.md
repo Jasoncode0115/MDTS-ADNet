@@ -36,11 +36,15 @@ Due to confidentiality requirements, only a part of the 4M-TAD dataset is being 
 If you need access to the entire dataset for research purposes, please contact me via email at huxiaolong01155@gmail.com.
 
 ### 2.2 Train
-The paper is under review and now needs to be kept confidential.
-Code will be available soon.
+To train the model , run:
+```python
+$ python Trian.py
+```
 ### 2.3 Evaluation
-The paper is under review and now needs to be kept confidential.
-Code will be available soon.
+To evaluate the model , run:
+```python
+$ python Evaluate.py
+```
 
 ## 3. Results
 AUC is the core indicator.
@@ -53,4 +57,13 @@ AUC is the core indicator.
 We thank cvlab-yonsei for the PyTorch implementation of the [MNAD](https://github.com/cvlab-yonsei/MNAD).
 
 ## Citation
-The paper is under review and now needs to be kept confidential.
+If you find this repo useful, please consider citing:
+```
+@inproceedings{liu2025MDTS-ADNet,
+title = {Intelligent traffic accident detection system in complex dynamic scenariosbased on the dual-stream spatiotemporal-fusion model},
+author = {Huilin Liu, Xiaolong Hu, Guanghan Sun, Wenkang Zhang, Jialei Zhan, Haobo Fang
+Yan Li, Wangi Ma},
+booktitle={Engineering Applications of Artificial Intelligence},
+year = {2025}
+}
+```
